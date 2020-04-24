@@ -4,11 +4,10 @@
 #include <string>
 #include <conio.h>
 #include <vector>
-#include <thread>
 using namespace std;
 
 struct tm *info; //时间结构体 
-struct clock
+struct clock 
 {
 	int h;
 	int m;
@@ -23,8 +22,8 @@ struct timer
 	int om;
 	int os;
 };
-vector<struct clock>clocks; //闹钟容器 
-vector<struct timer>timers;//计时器容器 
+vector<struct clock>clocks; //闹钟vector
+vector<struct timer>timers;//计时器vector
 time_t t1,t2;//用于检测时间是否变化 
 
 inline void clearScreen() //清屏 
@@ -34,7 +33,7 @@ inline void clearScreen() //清屏
 
 inline void Hello()
 {
-	cout<< "BaiTangClock Ver1.3.0" << endl;
+	cout<< "BaiTangClock Ver1.3.2" << endl;
 	cout<< "Made by Mo_Ink/白糖洒一地" <<endl;
 	cout <<"Github: Mo-Ink" << endl;
 	cout <<"Bilibili: 白糖洒一地" << endl;
@@ -119,7 +118,7 @@ inline void setClock() // 闹钟设置函数
 
 inline void ringClock(int &x) //响铃函数 
 {
-	PlaySound("data\ring.wav",NULL,SND_FILENAME|SND_ASYNC|SND_LOOP); //播放声音 
+	PlaySound("data/ring1.wav",NULL,SND_FILENAME|SND_ASYNC|SND_LOOP); //播放声音 
 	char c=' ';
 	cout << "您设置的时间到了，输入1结束，输入2五分钟后再提醒您。" << endl;
 	do
@@ -229,6 +228,19 @@ inline void setTimer() // 计时器设置函数
 	}
 }
 
+inline void ringTimer() //响铃函数 
+{
+	PlaySound("data/ring1.wav",NULL,SND_FILENAME|SND_ASYNC|SND_LOOP); //播放声音 
+	char c=' ';
+	cout << "您设置的时间到了，输入任意键结束" << endl;
+	do
+	{
+		if(_kbhit())
+			c=getch(); //字符读取
+	}while(c==' ');
+	PlaySound(NULL,NULL,SND_FILENAME|SND_ASYNC|SND_LOOP); //关闭声音 
+}
+
 inline void checkTimer() //检测计时器
 {
 	for(int i=0;i<timers.size();i++)//遍历整个容器 
@@ -236,18 +248,7 @@ inline void checkTimer() //检测计时器
 		if(timers[i].oh==info->tm_hour&&timers[i].om==info->tm_min&&timers[i].os<=info->tm_sec)//如果到时间了 
 		{
 			int tmpin;
-			ringClock(tmpin);//响铃 
-			if(tmpin==2)//如果选择五分钟后响铃 
-			{
-				struct timer tmp;
-				tmp.h=0;
-				tmp.m=5;
-				tmp.s=0;
-				tmp.oh=timers[i].h;
-				tmp.om=timers[i].m+5;
-				tmp.os=timers[i].s;
-				timers.push_back(tmp);
-			}
+			ringTimer();//响铃 
 			timers.erase(timers.begin()+i);//删除定时器 
 		}
 		else
@@ -265,7 +266,7 @@ inline void checkTimer() //检测计时器
 
 int main()
 {
-	SetConsoleTitle("BaiTangClock Ver1.3.0 | Made by Mo_Ink");
+	SetConsoleTitle("BaiTangClock Ver1.3.2 | Made by Mo_Ink");
 	Hello();
 	while(true)
 	{
@@ -277,8 +278,8 @@ int main()
 			clearScreen(); //刷新 
 			string s = asctime(info); //时间字符串 
 			cout << "当前时间 = " << s;
-			cout << "按n可进入闹钟管理！" << endl ;
-			cout << "按m可进入计时器管理！" << endl << endl;  
+			cout << "按N可进入闹钟管理！" << endl ;
+			cout << "按M可进入计时器管理！" << endl << endl;  
 			if(!clocks.empty())
 			{
 				cout << "闹钟列表：" << endl;
