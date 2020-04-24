@@ -4,9 +4,11 @@
 #include <string>
 #include <conio.h>
 #include <vector>
+#include <thread>
 using namespace std;
-struct tm *info; //æ—¶é—´ç»“æ„ä½“ 
-struct clock 
+
+struct tm *info; //Ê±¼ä½á¹¹Ìå 
+struct clock
 {
 	int h;
 	int m;
@@ -17,129 +19,129 @@ struct timer
 	int h;
 	int m;
 	int s;
-	int oh; //è®¡æ—¶ç»“æŸçš„æ—¶é—´ 
+	int oh; //¼ÆÊ±½áÊøµÄÊ±¼ä 
 	int om;
 	int os;
 };
-vector<struct clock>clocks; //é—¹é’Ÿvector
-vector<struct timer>timers;//è®¡æ—¶å™¨vector
-time_t t1,t2;//ç”¨äºæ£€æµ‹æ—¶é—´æ˜¯å¦å˜åŒ– 
+vector<struct clock>clocks; //ÄÖÖÓÈİÆ÷ 
+vector<struct timer>timers;//¼ÆÊ±Æ÷ÈİÆ÷ 
+time_t t1,t2;//ÓÃÓÚ¼ì²âÊ±¼äÊÇ·ñ±ä»¯ 
 
-inline void clearScreen() //æ¸…å± 
+inline void clearScreen() //ÇåÆÁ 
 {
     system("cls");
 }
 
 inline void Hello()
 {
-	cout<< "BaiTangClock Ver1.3.2" << endl;
-	cout<< "Made by Mo_Ink/ç™½ç³–æ´’ä¸€åœ°" <<endl;
+	cout<< "BaiTangClock Ver1.3.0" << endl;
+	cout<< "Made by Mo_Ink/°×ÌÇÈ÷Ò»µØ" <<endl;
 	cout <<"Github: Mo-Ink" << endl;
-	cout <<"Bilibili: ç™½ç³–æ´’ä¸€åœ°" << endl;
-	cout<< "----æœªç»å…è®¸ç¦æ­¢è½¬è½½----" << endl;
+	cout <<"Bilibili: °×ÌÇÈ÷Ò»µØ" << endl;
+	cout<< "----Î´¾­ÔÊĞí½ûÖ¹×ªÔØ----" << endl;
 	Sleep(2500);  
 }
 
-inline void getTime() //åˆ·æ–°æ—¶é—´å‡½æ•° 
+inline void getTime() //Ë¢ĞÂÊ±¼äº¯Êı 
 {
-	time_t curtime; //ç°åœ¨æ—¶é—´ 
-	time(&curtime); // è·å–æ—¶é—´ 
+	time_t curtime; //ÏÖÔÚÊ±¼ä 
+	time(&curtime); // »ñÈ¡Ê±¼ä 
 	t1=curtime;
-	info = localtime( &curtime ); //ç»“æ„ä½“èµ‹å€¼
+	info = localtime( &curtime ); //½á¹¹Ìå¸³Öµ
 }
 
-inline void setClock() // é—¹é’Ÿè®¾ç½®å‡½æ•° 
+inline void setClock() // ÄÖÖÓÉèÖÃº¯Êı 
 {
 	char c=' ';
 	clearScreen();
-	string s = asctime(info); //æ—¶é—´å­—ç¬¦ä¸² 
-	cout << "å½“å‰æ—¶é—´ = " << s;
-	cout << "æŒ‰1è®¾ç½®é—¹é’Ÿï¼ŒæŒ‰2åˆ é™¤é—¹é’Ÿï¼ŒæŒ‰3æ¸…é™¤æ‰€æœ‰é—¹é’Ÿï¼ŒæŒ‰å…¶ä»–é”®è¿”å›" << endl;	//ç”»é¢è¾“å‡º 
+	string s = asctime(info); //Ê±¼ä×Ö·û´® 
+	cout << "µ±Ç°Ê±¼ä = " << s;
+	cout << "°´1ÉèÖÃÄÖÖÓ£¬°´2É¾³ıÄÖÖÓ£¬°´3Çå³ıËùÓĞÄÖÖÓ£¬°´ÆäËû¼ü·µ»Ø" << endl;	//»­ÃæÊä³ö 
 	do
 	{
 		if(_kbhit())
-			c=getch(); //å­—ç¬¦è¯»å–
+			c=getch(); //×Ö·û¶ÁÈ¡
 	}while(c==' ');
 	if(c=='1')
 	{
-		struct clock tmp; //å…ˆè¾“å…¥å‚æ•°åæ¨å…¥vector 
-		int temp=0;//ä¸´æ—¶è®¡æ•° 
+		struct clock tmp; //ÏÈÊäÈë²ÎÊıºóÍÆÈëvector 
+		int temp=0;//ÁÙÊ±¼ÆÊı 
 		clearScreen();
-		string s = asctime(info); //æ—¶é—´å­—ç¬¦ä¸² 
-		cout << "å½“å‰æ—¶é—´ = " << s; 
-		cout << "è¯·é¡ºåºè¾“å…¥h m sï¼Œç¨‹åºä¼šåœ¨hå°æ—¶måˆ†é’Ÿsç§’æ—¶å“é“ƒ(24håˆ¶)" << endl;   //ç”»é¢è¾“å‡º 
+		string s = asctime(info); //Ê±¼ä×Ö·û´® 
+		cout << "µ±Ç°Ê±¼ä = " << s; 
+		cout << "ÇëË³ĞòÊäÈëh m s£¬³ÌĞò»áÔÚhĞ¡Ê±m·ÖÖÓsÃëÊ±ÏìÁå(24hÖÆ)" << endl;   //»­ÃæÊä³ö 
 		do
 		{
 			if(temp!=0)
-				cout << "æ•°æ®é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥" << endl;
+				cout << "Êı¾İ´íÎó£¬ÇëÖØĞÂÊäÈë" << endl;
 			cin >> tmp.h >> tmp.m >> tmp.s;
 			temp++;
 		}
-		while(tmp.h>23||tmp.m>59||tmp.s>59); //è‹¥æ•°æ®é”™è¯¯åˆ™é‡æ–°è¾“å…¥ 
-		clocks.push_back(tmp);//æ¨å…¥vector 
-		cout << "é—¹é’Ÿå°†åœ¨" << tmp.h <<"æ—¶ " << tmp.m << "åˆ† " << tmp.s <<"ç§’æ—¶å“é“ƒï¼" <<endl;
-		Sleep(1800); //ç­‰å¾…2.8s
+		while(tmp.h>23||tmp.m>59||tmp.s>59); //ÈôÊı¾İ´íÎóÔòÖØĞÂÊäÈë 
+		clocks.push_back(tmp);//ÍÆÈëvector 
+		cout << "ÄÖÖÓ½«ÔÚ" << tmp.h <<"Ê± " << tmp.m << "·Ö " << tmp.s <<"ÃëÊ±ÏìÁå£¡" <<endl;
+		Sleep(1800); //µÈ´ı2.8s
 	}
 	if(c=='2'&&!clocks.empty())
 	{
 		int num,tot=0;
 		clearScreen();
-		string s = asctime(info); //æ—¶é—´å­—ç¬¦ä¸² 
-		cout << "å½“å‰æ—¶é—´ = " << s << endl; //ç”»é¢è¾“å‡º 
+		string s = asctime(info); //Ê±¼ä×Ö·û´® 
+		cout << "µ±Ç°Ê±¼ä = " << s << endl; //»­ÃæÊä³ö 
 		if(!clocks.empty())
 		{
-			cout << "é—¹é’Ÿåˆ—è¡¨ï¼š" << endl; //ç”»é¢è¾“å‡º 
+			cout << "ÄÖÖÓÁĞ±í£º" << endl; //»­ÃæÊä³ö 
 			for(int i=0;i<clocks.size();i++)
 				cout << i+1 << ' ' << clocks[i].h << "h " << clocks[i].m << "m " << clocks[i].s << "s " <<endl;
 		}
-		cout << endl << "è¯·è¾“å…¥è¦åˆ é™¤çš„é—¹é’Ÿçš„ç¼–å·ï¼š" << endl;
+		cout << endl << "ÇëÊäÈëÒªÉ¾³ıµÄÄÖÖÓµÄ±àºÅ£º" << endl;
 		do
 		{
 			if(tot!=0)
-				cout << "æ•°æ®é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥" << endl;
+				cout << "Êı¾İ´íÎó£¬ÇëÖØĞÂÊäÈë" << endl;
 			cin >> num;
 			tot++;
 		}while(num<=0||num>clocks.size());
 		clocks.erase(clocks.begin()+num-1);
-		cout << "å·²åˆ é™¤ï¼" << endl;
+		cout << "ÒÑÉ¾³ı£¡" << endl;
 		Sleep(1000);
 	}
 	if(c=='3'&&!clocks.empty())
 	{
 		clearScreen();
-		string s = asctime(info); //æ—¶é—´å­—ç¬¦ä¸² 
-		cout << "å½“å‰æ—¶é—´ = " << s << endl; //ç”»é¢è¾“å‡º 
+		string s = asctime(info); //Ê±¼ä×Ö·û´® 
+		cout << "µ±Ç°Ê±¼ä = " << s << endl; //»­ÃæÊä³ö 
 		clocks.clear();
-		cout << "å·²æ¸…é™¤ï¼" << endl;
+		cout << "ÒÑÇå³ı£¡" << endl;
 		Sleep(1000);
 	}
 }
 
-inline void ringClock(int &x) //å“é“ƒå‡½æ•° 
+inline void ringClock(int &x) //ÏìÁåº¯Êı 
 {
-	PlaySound(".\data\ring.wav",NULL,SND_FILENAME|SND_ASYNC|SND_LOOP); //æ’­æ”¾å£°éŸ³ 
+	PlaySound("data\ring.wav",NULL,SND_FILENAME|SND_ASYNC|SND_LOOP); //²¥·ÅÉùÒô 
 	char c=' ';
-	cout << "æ‚¨è®¾ç½®çš„æ—¶é—´åˆ°äº†ï¼Œè¾“å…¥1ç»“æŸï¼Œè¾“å…¥2äº”åˆ†é’Ÿåå†æé†’æ‚¨ã€‚" << endl;
+	cout << "ÄúÉèÖÃµÄÊ±¼äµ½ÁË£¬ÊäÈë1½áÊø£¬ÊäÈë2Îå·ÖÖÓºóÔÙÌáĞÑÄú¡£" << endl;
 	do
 	{
 		if(_kbhit())
-			c=getch(); //å­—ç¬¦è¯»å–
+			c=getch(); //×Ö·û¶ÁÈ¡
 	}while(c==' ');
 	if(c=='2')
 		x=2;
 	else
 		x=1;
-	PlaySound(NULL,NULL,SND_FILENAME|SND_ASYNC|SND_LOOP); //å…³é—­å£°éŸ³ 
+	PlaySound(NULL,NULL,SND_FILENAME|SND_ASYNC|SND_LOOP); //¹Ø±ÕÉùÒô 
 }
 
-inline void checkClock() //æ£€æµ‹é—¹é’Ÿ
+inline void checkClock() //¼ì²âÄÖÖÓ
 {
-	for(int i=0;i<clocks.size();i++)//éå†æ•´ä¸ªå®¹å™¨ 
-		if(clocks[i].h==info->tm_hour&&clocks[i].m==info->tm_min&&clocks[i].s==info->tm_sec)//å¦‚æœåˆ°æ—¶é—´äº† 
+	for(int i=0;i<clocks.size();i++)//±éÀúÕû¸öÈİÆ÷ 
+		if(clocks[i].h==info->tm_hour&&clocks[i].m==info->tm_min&&clocks[i].s==info->tm_sec)//Èç¹ûµ½Ê±¼äÁË 
 		{
 			int tmpin;
-			ringClock(tmpin);//å“é“ƒ 
-			if(tmpin==2)//å¦‚æœé€‰æ‹©äº”åˆ†é’Ÿåå“é“ƒ 
+			ringClock(tmpin);//ÏìÁå 
+			if(tmpin==2)//Èç¹ûÑ¡ÔñÎå·ÖÖÓºóÏìÁå 
 			{
 				struct clock tmp;
 				tmp.h=clocks[i].h;
@@ -147,34 +149,34 @@ inline void checkClock() //æ£€æµ‹é—¹é’Ÿ
 				tmp.s=clocks[i].s;
 				clocks.push_back(tmp);
 			}
-			clocks.erase(clocks.begin()+i);//åˆ é™¤é—¹é’Ÿ 
+			clocks.erase(clocks.begin()+i);//É¾³ıÄÖÖÓ 
 		}
 }
 
-inline void setTimer() // è®¡æ—¶å™¨è®¾ç½®å‡½æ•° 
+inline void setTimer() // ¼ÆÊ±Æ÷ÉèÖÃº¯Êı 
 {
 	char c=' ';
 	clearScreen();
-	string s = asctime(info); //æ—¶é—´å­—ç¬¦ä¸² 
-	cout << "å½“å‰æ—¶é—´ = " << s;
-	cout << "æŒ‰1è®¾ç½®è®¡æ—¶å™¨ï¼ŒæŒ‰2åˆ é™¤è®¡æ—¶å™¨ï¼ŒæŒ‰3æ¸…é™¤æ‰€æœ‰è®¡æ—¶å™¨ï¼ŒæŒ‰å…¶ä»–é”®è¿”å›" << endl;	//ç”»é¢è¾“å‡º 
+	string s = asctime(info); //Ê±¼ä×Ö·û´® 
+	cout << "µ±Ç°Ê±¼ä = " << s;
+	cout << "°´1ÉèÖÃ¼ÆÊ±Æ÷£¬°´2É¾³ı¼ÆÊ±Æ÷£¬°´3Çå³ıËùÓĞ¼ÆÊ±Æ÷£¬°´ÆäËû¼ü·µ»Ø" << endl;	//»­ÃæÊä³ö 
 	do
 	{
 		if(_kbhit())
-			c=getch(); //å­—ç¬¦è¯»å–
+			c=getch(); //×Ö·û¶ÁÈ¡
 	}while(c==' ');
 	if(c=='1')
 	{
-		struct timer tmp;//å…ˆè¾“å…¥å‚æ•°åæ¨å…¥vector
+		struct timer tmp;//ÏÈÊäÈë²ÎÊıºóÍÆÈëvector
 		int temp=0;
 		clearScreen();
-		string s = asctime(info); //æ—¶é—´å­—ç¬¦ä¸² 
-		cout << "å½“å‰æ—¶é—´ = " << s; 
-		cout << "è¯·é¡ºåºè¾“å…¥h m sï¼Œç¨‹åºä¼šåœ¨hå°æ—¶måˆ†é’Ÿsç§’åå“é“ƒ" << endl; 
+		string s = asctime(info); //Ê±¼ä×Ö·û´® 
+		cout << "µ±Ç°Ê±¼ä = " << s; 
+		cout << "ÇëË³ĞòÊäÈëh m s£¬³ÌĞò»áÔÚhĞ¡Ê±m·ÖÖÓsÃëºóÏìÁå" << endl; 
 		do
 		{
 			if(temp!=0)
-				cout << "æ•°æ®é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥" << endl;
+				cout << "Êı¾İ´íÎó£¬ÇëÖØĞÂÊäÈë" << endl;
 			cin >> tmp.h >> tmp.m >> tmp.s;
 			temp++;
 		}
@@ -188,67 +190,65 @@ inline void setTimer() // è®¡æ—¶å™¨è®¾ç½®å‡½æ•°
 			tmp.om=tmp.om%60;
 		if(tmp.os>=60)
 			tmp.os=tmp.os%60;
-		timers.push_back(tmp);//æ¨å…¥vector 
-		cout << "è®¡æ—¶å™¨å°†åœ¨" << tmp.h <<"æ—¶ " << tmp.m << "åˆ† " << tmp.s <<"ç§’åå“é“ƒï¼" <<endl;
-		Sleep(1800); //ç­‰å¾…2.8s
+		timers.push_back(tmp);//ÍÆÈëvector 
+		cout << "¼ÆÊ±Æ÷½«ÔÚ" << tmp.h <<"Ê± " << tmp.m << "·Ö " << tmp.s <<"ÃëºóÏìÁå£¡" <<endl;
+		Sleep(1800); //µÈ´ı2.8s
 	}
 	if(c=='2'&&!timers.empty())
 	{
 		int num,tot=0;
 		clearScreen();
-		string s = asctime(info); //æ—¶é—´å­—ç¬¦ä¸² 
-		cout << "å½“å‰æ—¶é—´ = " << s << endl; //ç”»é¢è¾“å‡º 
+		string s = asctime(info); //Ê±¼ä×Ö·û´® 
+		cout << "µ±Ç°Ê±¼ä = " << s << endl; //»­ÃæÊä³ö 
 		if(!timers.empty())
 		{
-			cout << "è®¡æ—¶å™¨åˆ—è¡¨ï¼š" << endl; //ç”»é¢è¾“å‡º 
+			cout << "¼ÆÊ±Æ÷ÁĞ±í£º" << endl; //»­ÃæÊä³ö 
 			for(int i=0;i<timers.size();i++)
 				cout << i+1 << ' ' << timers[i].h << "h " << timers[i].m << "m " << timers[i].s << "s " <<endl;
 		}
-		cout << endl << "è¯·è¾“å…¥è¦åˆ é™¤çš„é—¹é’Ÿçš„ç¼–å·ï¼š" << endl;
+		cout << endl << "ÇëÊäÈëÒªÉ¾³ıµÄÄÖÖÓµÄ±àºÅ£º" << endl;
 		do
 		{
 			if(tot!=0)
-				cout << "æ•°æ®é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥" << endl;
+				cout << "Êı¾İ´íÎó£¬ÇëÖØĞÂÊäÈë" << endl;
 			cin >> num;
 			tot++;
 		}while(num<=0||num>timers.size());
 		timers.erase(timers.begin()+num-1);
-		cout << "å·²åˆ é™¤ï¼" << endl;
+		cout << "ÒÑÉ¾³ı£¡" << endl;
 		Sleep(1000);
 	}
 	if(c=='3'&&!timers.empty())
 	{
 		clearScreen();
-		string s = asctime(info); //æ—¶é—´å­—ç¬¦ä¸² 
-		cout << "å½“å‰æ—¶é—´ = " << s << endl; //ç”»é¢è¾“å‡º 
+		string s = asctime(info); //Ê±¼ä×Ö·û´® 
+		cout << "µ±Ç°Ê±¼ä = " << s << endl; //»­ÃæÊä³ö 
 		timers.clear();
-		cout << "å·²æ¸…é™¤ï¼" << endl;
+		cout << "ÒÑÇå³ı£¡" << endl;
 		Sleep(1000);
 	}
 }
 
-inline void ringTimer() //å“é“ƒå‡½æ•° 
+inline void checkTimer() //¼ì²â¼ÆÊ±Æ÷
 {
-	PlaySound("ring.wav",NULL,SND_FILENAME|SND_ASYNC|SND_LOOP); //æ’­æ”¾å£°éŸ³ 
-	char c=' ';
-	cout << "æ‚¨è®¾ç½®çš„æ—¶é—´åˆ°äº†ï¼Œè¾“å…¥ä»»æ„é”®ç»“æŸ" << endl;
-	do
+	for(int i=0;i<timers.size();i++)//±éÀúÕû¸öÈİÆ÷ 
 	{
-		if(_kbhit())
-			c=getch(); //å­—ç¬¦è¯»å–
-	}while(c==' ');
-	PlaySound(NULL,NULL,SND_FILENAME|SND_ASYNC|SND_LOOP); //å…³é—­å£°éŸ³ 
-}
-
-inline void checkTimer() //æ£€æµ‹è®¡æ—¶å™¨
-{
-	for(int i=0;i<timers.size();i++)//éå†æ•´ä¸ªå®¹å™¨ 
-	{
-		if(timers[i].oh==info->tm_hour&&timers[i].om==info->tm_min&&timers[i].os<=info->tm_sec)//å¦‚æœåˆ°æ—¶é—´äº† 
+		if(timers[i].oh==info->tm_hour&&timers[i].om==info->tm_min&&timers[i].os<=info->tm_sec)//Èç¹ûµ½Ê±¼äÁË 
 		{
 			int tmpin;
-			ringTimer();//å“é“ƒ 
-			timers.erase(timers.begin()+i);//åˆ é™¤å®šæ—¶å™¨ 
+			ringClock(tmpin);//ÏìÁå 
+			if(tmpin==2)//Èç¹ûÑ¡ÔñÎå·ÖÖÓºóÏìÁå 
+			{
+				struct timer tmp;
+				tmp.h=0;
+				tmp.m=5;
+				tmp.s=0;
+				tmp.oh=timers[i].h;
+				tmp.om=timers[i].m+5;
+				tmp.os=timers[i].s;
+				timers.push_back(tmp);
+			}
+			timers.erase(timers.begin()+i);//É¾³ı¶¨Ê±Æ÷ 
 		}
 		else
 		{
@@ -265,36 +265,36 @@ inline void checkTimer() //æ£€æµ‹è®¡æ—¶å™¨
 
 int main()
 {
-	SetConsoleTitle("BaiTangClock Ver1.3.2 | Made by Mo_Ink");
+	SetConsoleTitle("BaiTangClock Ver1.3.0 | Made by Mo_Ink");
 	Hello();
 	while(true)
 	{
 		char c = ' ';
-		t2=t1;//t1,t2æ ¡å‡† 
-		getTime(); //è·å–æ—¶é—´ 
-		if(t1!=t2) //è‹¥t1åˆ·æ–°åäºt2ä¸ç›¸åŒåˆ™åˆ·æ–°ç”»é¢ 
+		t2=t1;//t1,t2Ğ£×¼ 
+		getTime(); //»ñÈ¡Ê±¼ä 
+		if(t1!=t2) //Èôt1Ë¢ĞÂºóÓÚt2²»ÏàÍ¬ÔòË¢ĞÂ»­Ãæ 
 		{
-			clearScreen(); //åˆ·æ–° 
-			string s = asctime(info); //æ—¶é—´å­—ç¬¦ä¸² 
-			cout << "å½“å‰æ—¶é—´ = " << s;
-			cout << "æŒ‰Nå¯è¿›å…¥é—¹é’Ÿç®¡ç†ï¼" << endl ;
-			cout << "æŒ‰Må¯è¿›å…¥è®¡æ—¶å™¨ç®¡ç†ï¼" << endl << endl;  
+			clearScreen(); //Ë¢ĞÂ 
+			string s = asctime(info); //Ê±¼ä×Ö·û´® 
+			cout << "µ±Ç°Ê±¼ä = " << s;
+			cout << "°´n¿É½øÈëÄÖÖÓ¹ÜÀí£¡" << endl ;
+			cout << "°´m¿É½øÈë¼ÆÊ±Æ÷¹ÜÀí£¡" << endl << endl;  
 			if(!clocks.empty())
 			{
-				cout << "é—¹é’Ÿåˆ—è¡¨ï¼š" << endl;
+				cout << "ÄÖÖÓÁĞ±í£º" << endl;
 				for(int i=0;i<clocks.size();i++)
 					cout << i+1 << ' ' << clocks[i].h << "h " << clocks[i].m << "m " << clocks[i].s << "s " <<endl;
 			}
 			cout << endl;
 			if(!timers.empty())
 			{
-				cout << "è®¡æ—¶å™¨åˆ—è¡¨ï¼š" << endl;
+				cout << "¼ÆÊ±Æ÷ÁĞ±í£º" << endl;
 				for(int i=0;i<timers.size();i++)
 					cout << i+1 << ' ' << timers[i].h << "h " << timers[i].m << "m " << timers[i].s << "s " <<endl;
 			}
 		}
 		if(_kbhit())
-			c=getch(); //å­—ç¬¦è¯»å– 
+			c=getch(); //×Ö·û¶ÁÈ¡ 
 		if(c=='n'||c=='N')
 			setClock();
 		if(c=='m'||c=='M')
