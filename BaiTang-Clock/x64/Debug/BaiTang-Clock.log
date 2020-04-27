@@ -1,0 +1,7 @@
+﻿smallegg.cpp(13,13): warning : illegal character encoding in string literal [-Winvalid-source-encoding]
+smallegg.cpp(26,22): warning : illegal character encoding in string literal [-Winvalid-source-encoding]
+smallegg.cpp(28,15): warning : illegal character encoding in string literal [-Winvalid-source-encoding]
+Hello.cpp(10,32): warning : illegal character encoding in string literal [-Winvalid-source-encoding]
+Hello.cpp(12,30): warning : illegal character encoding in string literal [-Winvalid-source-encoding]
+Hello.cpp(13,24): warning : illegal character encoding in string literal [-Winvalid-source-encoding]
+  BaiTang-Clock.vcxproj -> C:\Users\Administrator\Desktop\BaiTang-Clock\x64\Debug\BaiTang-Clock.exe

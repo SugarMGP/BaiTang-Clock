@@ -1,0 +1,32 @@
+[
+  {
+    "directory": "C:\\Users\\Administrator\\Desktop\\BaiTang-Clock\\BaiTang-Clock",
+    "command": "\"C:\\WINDOWS\\system32\\CL.exe\" \/c \/Z7 \/nologo \/W3 \/WX- \/diagnostics:column \/O2 \/Ot \/D NDEBUG \/D _CONSOLE \/D _UNICODE \/D UNICODE \/EHsc \/MD \/GS \/Gy \/fp:precise \/permissive- \/Fo\"x64\\Release\\\\\" \/Gd \/TP  -m64   \"C:\\Users\\Administrator\\Desktop\\BaiTang-Clock\\BaiTang-Clock\\clearScreen.cpp\"",
+    "file": "C:\\Users\\Administrator\\Desktop\\BaiTang-Clock\\BaiTang-Clock\\clearScreen.cpp"
+  },
+  {
+    "directory": "C:\\Users\\Administrator\\Desktop\\BaiTang-Clock\\BaiTang-Clock",
+    "command": "\"C:\\WINDOWS\\system32\\CL.exe\" \/c \/Z7 \/nologo \/W3 \/WX- \/diagnostics:column \/O2 \/Ot \/D NDEBUG \/D _CONSOLE \/D _UNICODE \/D UNICODE \/EHsc \/MD \/GS \/Gy \/fp:precise \/permissive- \/Fo\"x64\\Release\\\\\" \/Gd \/TP  -m64   \"C:\\Users\\Administrator\\Desktop\\BaiTang-Clock\\BaiTang-Clock\\Hello.cpp\"",
+    "file": "C:\\Users\\Administrator\\Desktop\\BaiTang-Clock\\BaiTang-Clock\\Hello.cpp"
+  },
+  {
+    "directory": "C:\\Users\\Administrator\\Desktop\\BaiTang-Clock\\BaiTang-Clock",
+    "command": "\"C:\\WINDOWS\\system32\\CL.exe\" \/c \/Z7 \/nologo \/W3 \/WX- \/diagnostics:column \/O2 \/Ot \/D NDEBUG \/D _CONSOLE \/D _UNICODE \/D UNICODE \/EHsc \/MD \/GS \/Gy \/fp:precise \/permissive- \/Fo\"x64\\Release\\\\\" \/Gd \/TP  -m64   \"C:\\Users\\Administrator\\Desktop\\BaiTang-Clock\\BaiTang-Clock\\main.cpp\"",
+    "file": "C:\\Users\\Administrator\\Desktop\\BaiTang-Clock\\BaiTang-Clock\\main.cpp"
+  },
+  {
+    "directory": "C:\\Users\\Administrator\\Desktop\\BaiTang-Clock\\BaiTang-Clock",
+    "command": "\"C:\\WINDOWS\\system32\\CL.exe\" \/c \/Z7 \/nologo \/W3 \/WX- \/diagnostics:column \/O2 \/Ot \/D NDEBUG \/D _CONSOLE \/D _UNICODE \/D UNICODE \/EHsc \/MD \/GS \/Gy \/fp:precise \/permissive- \/Fo\"x64\\Release\\\\\" \/Gd \/TP  -m64   \"C:\\Users\\Administrator\\Desktop\\BaiTang-Clock\\BaiTang-Clock\\quit.cpp\"",
+    "file": "C:\\Users\\Administrator\\Desktop\\BaiTang-Clock\\BaiTang-Clock\\quit.cpp"
+  },
+  {
+    "directory": "C:\\Users\\Administrator\\Desktop\\BaiTang-Clock\\BaiTang-Clock",
+    "command": "\"C:\\WINDOWS\\system32\\CL.exe\" \/c \/Z7 \/nologo \/W3 \/WX- \/diagnostics:column \/O2 \/Ot \/D NDEBUG \/D _CONSOLE \/D _UNICODE \/D UNICODE \/EHsc \/MD \/GS \/Gy \/fp:precise \/permissive- \/Fo\"x64\\Release\\\\\" \/Gd \/TP  -m64   \"C:\\Users\\Administrator\\Desktop\\BaiTang-Clock\\BaiTang-Clock\\ring.cpp\"",
+    "file": "C:\\Users\\Administrator\\Desktop\\BaiTang-Clock\\BaiTang-Clock\\ring.cpp"
+  },
+  {
+    "directory": "C:\\Users\\Administrator\\Desktop\\BaiTang-Clock\\BaiTang-Clock",
+    "command": "\"C:\\WINDOWS\\system32\\CL.exe\" \/c \/Z7 \/nologo \/W3 \/WX- \/diagnostics:column \/O2 \/Ot \/D NDEBUG \/D _CONSOLE \/D _UNICODE \/D UNICODE \/EHsc \/MD \/GS \/Gy \/fp:precise \/permissive- \/Fo\"x64\\Release\\\\\" \/Gd \/TP  -m64   \"C:\\Users\\Administrator\\Desktop\\BaiTang-Clock\\BaiTang-Clock\\smallegg.cpp\"",
+    "file": "C:\\Users\\Administrator\\Desktop\\BaiTang-Clock\\BaiTang-Clock\\smallegg.cpp"
+  }
+]
