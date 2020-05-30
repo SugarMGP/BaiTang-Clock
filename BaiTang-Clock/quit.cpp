@@ -8,8 +8,8 @@ void quit()
 {
 	clearScreen();
 	cout << endl;
-	cout << " 感谢您使用本程序！本程序还有待改进，若有不足之处请见谅！" << endl;
-	cout << " 程序将在不久后关闭！" << endl;
+	cout << " 鎰熻阿鎮ㄤ娇鐢ㄦ湰绋嬪簭锛佹湰绋嬪簭杩樻湁寰呮敼杩涳紝鑻ユ湁涓嶈冻涔嬪璇疯璋咃紒" << endl;
+	cout << " 绋嬪簭灏嗗湪涓嶄箙鍚庡叧闂紒" << endl;
 	Sleep(1500);
 	exit(0);
 }

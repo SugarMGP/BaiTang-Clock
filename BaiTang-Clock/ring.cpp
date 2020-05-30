@@ -15,59 +15,59 @@ int ring = 1;
 #define ringJi MAKEINTRESOURCE(IDR_WAVE3)
 #define ringCrp MAKEINTRESOURCE(IDR_WAVE4)
 
-void ringClock(int& x) //ÏìÁåº¯Êı 
+void ringClock(int& x) //å“é“ƒå‡½æ•° 
 {
 	if (ring == 1)
-		PlaySound(ringDef, GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC | SND_LOOP); //²¥·ÅÉùÒô 
+		PlaySound(ringDef, GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC | SND_LOOP); //æ’­æ”¾å£°éŸ³ 
 	if (ring == 2)
-		PlaySound(ringBman, GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC | SND_LOOP); //²¥·ÅÉùÒô 
+		PlaySound(ringBman, GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC | SND_LOOP); //æ’­æ”¾å£°éŸ³ 
 	if (ring == 3)
-		PlaySound(ringJi, GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC | SND_LOOP); //²¥·ÅÉùÒô  
+		PlaySound(ringJi, GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC | SND_LOOP); //æ’­æ”¾å£°éŸ³  
 	if (ring == 4)
-		PlaySound(ringCrp, GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC | SND_LOOP); //²¥·ÅÉùÒô 
+		PlaySound(ringCrp, GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC | SND_LOOP); //æ’­æ”¾å£°éŸ³ 
 	char c = ' ';
-	cout << " ÄúÉèÖÃµÄÊ±¼äµ½ÁË£¬ÊäÈë1½áÊø£¬ÊäÈë2½«ÔÚÎå·ÖÖÓºóÔÙ´ÎÌáĞÑÄú¡£" << endl;
+	cout << " æ‚¨è®¾ç½®çš„æ—¶é—´åˆ°äº†ï¼Œè¾“å…¥1ç»“æŸï¼Œè¾“å…¥2å°†åœ¨äº”åˆ†é’Ÿåå†æ¬¡æé†’æ‚¨ã€‚" << endl;
 	do
 	{
 		if (_kbhit())
-			c = _getch(); //×Ö·û¶ÁÈ¡
+			c = _getch(); //å­—ç¬¦è¯»å–
 	} while (c == ' ');
 	if (c == '2')
 		x = 2;
 	else
 		x = 1;
-	PlaySound(NULL, NULL, SND_ASYNC | SND_LOOP); //¹Ø±ÕÉùÒô 
+	PlaySound(NULL, NULL, SND_ASYNC | SND_LOOP); //å…³é—­å£°éŸ³ 
 }
 
-void ringTimer() //ÏìÁåº¯Êı 
+void ringTimer() //å“é“ƒå‡½æ•° 
 {
 	if (ring == 1)
-		PlaySound(ringDef, GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC | SND_LOOP); //²¥·ÅÉùÒô 
+		PlaySound(ringDef, GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC | SND_LOOP); //æ’­æ”¾å£°éŸ³ 
 	if (ring == 2)
-		PlaySound(ringBman, GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC | SND_LOOP); //²¥·ÅÉùÒô 
+		PlaySound(ringBman, GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC | SND_LOOP); //æ’­æ”¾å£°éŸ³ 
 	if (ring == 3)
-		PlaySound(ringJi, GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC | SND_LOOP); //²¥·ÅÉùÒô  
+		PlaySound(ringJi, GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC | SND_LOOP); //æ’­æ”¾å£°éŸ³  
 	if (ring == 4)
-		PlaySound(ringCrp, GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC | SND_LOOP); //²¥·ÅÉùÒô 
+		PlaySound(ringCrp, GetModuleHandle(NULL), SND_RESOURCE | SND_ASYNC | SND_LOOP); //æ’­æ”¾å£°éŸ³ 
 	char c = ' ';
-	cout << " ÄúÉèÖÃµÄÊ±¼äµ½ÁË£¬ÊäÈëÈÎÒâ¼ü½áÊø" << endl;
+	cout << " æ‚¨è®¾ç½®çš„æ—¶é—´åˆ°äº†ï¼Œè¾“å…¥ä»»æ„é”®ç»“æŸ" << endl;
 	do
 	{
 		if (_kbhit())
-			c = _getch(); //×Ö·û¶ÁÈ¡
+			c = _getch(); //å­—ç¬¦è¯»å–
 	} while (c == ' ');
-	PlaySound(NULL, NULL, SND_ASYNC | SND_LOOP); //¹Ø±ÕÉùÒô 
+	PlaySound(NULL, NULL, SND_ASYNC | SND_LOOP); //å…³é—­å£°éŸ³ 
 }
 
 void showRing()
 {
-	cout << " µ±Ç°ÁåÉù£º";
+	cout << " å½“å‰é“ƒå£°ï¼š";
 	if (ring == 1)
-		cout << "1.Ä¬ÈÏ" << endl;
+		cout << "1.é»˜è®¤" << endl;
 	if (ring == 2)
-		cout << "2.ºÚÈËÌ§¹×" << endl;
+		cout << "2.é»‘äººæŠ¬æ£º" << endl;
 	if (ring == 3)
-		cout << "3.¼¦ÄãÌ«ÃÀ" << endl;
+		cout << "3.é¸¡ä½ å¤ªç¾" << endl;
 	if (ring == 4)
 		cout << "4.Creeper?" << endl;
 }
@@ -77,16 +77,16 @@ void setRing()
 	int n, tot = 0;
 	clearScreen();
 	cout << endl;
-	cout << " ¿ÉÑ¡ÁåÉù£º" << endl;	//»­ÃæÊä³ö 
-	cout << " 1.Ä¬ÈÏ" << endl;
-	cout << " 2.ºÚÈËÌ§¹×" << endl;
-	cout << " 3.¼¦ÄãÌ«ÃÀ" << endl;
+	cout << " å¯é€‰é“ƒå£°ï¼š" << endl;	//ç”»é¢è¾“å‡º 
+	cout << " 1.é»˜è®¤" << endl;
+	cout << " 2.é»‘äººæŠ¬æ£º" << endl;
+	cout << " 3.é¸¡ä½ å¤ªç¾" << endl;
 	cout << " 4.Creeper?" << endl << endl;
-	cout << " ÇëÊäÈëÏëÒªµÄÁåÉù±àºÅ:" << endl;
+	cout << " è¯·è¾“å…¥æƒ³è¦çš„é“ƒå£°ç¼–å·:" << endl;
 	do
 	{
 		if (tot != 0)
-			cout << " Êı¾İ´íÎó£¬ÇëÖØĞÂÊäÈë" << endl;
+			cout << " æ•°æ®é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥" << endl;
 		cin.clear();
 		cin.sync();
 		cin >> n;

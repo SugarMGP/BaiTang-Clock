@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ Éú³ÉµÄ°üº¬ÎÄ¼ş¡£
-// ¹© BaiTang-Clock.rc Ê¹ÓÃ
+// Microsoft Visual C++ ç”Ÿæˆçš„åŒ…å«æ–‡ä»¶ã€‚
+// ä¾› BaiTang-Clock.rc ä½¿ç”¨
 //
 #define IDR_WAVE1                       101
 #define IDR_WAVE2                       102

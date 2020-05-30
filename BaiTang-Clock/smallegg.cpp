@@ -11,7 +11,7 @@ void egg()
 	srand((int)time(0));
 	SetConsoleTitle(TEXT("Boooooooom! BUG++"));
 	for (int i = 1; i <= 2000; i++)
-		cout << " Êý¾Ý´íÎó£¬ÇëÖØÐÂÊäÈë" << endl;
+		cout << " æ•°æ®é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥" << endl;
 	for (int i = 1; i <= 1500; i++)
 		cout << "ERROR!" << endl;
 
@@ -22,11 +22,11 @@ void egg()
 		p++;
 		cout << p;
 		if (i % 5 == 0)
-			cout << "å“”å¯";
+			cout << "éæ–¿æ¾‚";
 		if (i % 3 == 0)
-			cout << "ç™½ç³–æ´›´ä½?";
+			cout << "é§ç•Œç¡¸å¨²æ´¿æµ£?";
 		if (i % 8 == 0)
-			cout << " $¾Ý$%^&Îó#)ÐÂ*#%ÊäÈë";
+			cout << " $æ®$%^&è¯¯#)æ–°*#%è¾“å…¥";
 		if (i % rand() == 0)
 			cout << endl;
 		if (i % 34 == 0 && tmp < 4)

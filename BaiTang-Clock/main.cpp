@@ -17,7 +17,7 @@
 
 using namespace std;
 
-struct tm info; //Ê±¼ä½á¹¹Ìå 
+struct tm info; //æ—¶é—´ç»“æ„ä½“ 
 struct clock
 {
 	int h;
@@ -29,7 +29,7 @@ struct timer
 	int h;
 	int m;
 	int s;
-	int oh; //¼ÆÊ±½áÊøµÄÊ±¼ä 
+	int oh; //è®¡æ—¶ç»“æŸçš„æ—¶é—´ 
 	int om;
 	int os;
 };
@@ -40,71 +40,71 @@ struct sw //stopwatch
 	int s;
 	int time;
 };
-vector<struct clock>clocks; //ÄÖÖÓvector
-vector<struct timer>timers;//¼ÆÊ±Æ÷vector
-vector<struct sw>sws;//Ãë±í·ÖÁÑvector
+vector<struct clock>clocks; //é—¹é’Ÿvector
+vector<struct timer>timers;//è®¡æ—¶å™¨vector
+vector<struct sw>sws;//ç§’è¡¨åˆ†è£‚vector
 struct sw stopwatch;
-time_t t1, t2;//ÓÃÓÚ¼ì²âÊ±¼äÊÇ·ñ±ä»¯ 
+time_t t1, t2;//ç”¨äºæ£€æµ‹æ—¶é—´æ˜¯å¦å˜åŒ– 
 
-inline void getTime() //Ë¢ĞÂÊ±¼äº¯Êı 
+inline void getTime() //åˆ·æ–°æ—¶é—´å‡½æ•° 
 {
-	time_t curtime; //ÏÖÔÚÊ±¼ä 
-	time(&curtime); // »ñÈ¡Ê±¼ä 
+	time_t curtime; //ç°åœ¨æ—¶é—´ 
+	time(&curtime); // è·å–æ—¶é—´ 
 	t1 = curtime;
-	localtime_s(&info, &t1); //½á¹¹Ìå¸³Öµ
+	localtime_s(&info, &t1); //ç»“æ„ä½“èµ‹å€¼
 }
 
-inline void setClock() // ÄÖÖÓÉèÖÃº¯Êı 
+inline void setClock() // é—¹é’Ÿè®¾ç½®å‡½æ•° 
 {
 	char c = ' ';
 	clearScreen();
 	char str[26];
-	asctime_s(str, sizeof str, &info); //Ê±¼ä×Ö·û´® 
-	cout << " µ±Ç°Ê±¼ä = " << str << endl;
-	cout << " °´1ÉèÖÃÄÖÖÓ£¬°´2É¾³ıÄÖÖÓ£¬°´3Çå³ıËùÓĞÄÖÖÓ£¬°´ÆäËû¼ü·µ»Ø" << endl;	//»­ÃæÊä³ö 
+	asctime_s(str, sizeof str, &info); //æ—¶é—´å­—ç¬¦ä¸² 
+	cout << " å½“å‰æ—¶é—´ = " << str << endl;
+	cout << " æŒ‰1è®¾ç½®é—¹é’Ÿï¼ŒæŒ‰2åˆ é™¤é—¹é’Ÿï¼ŒæŒ‰3æ¸…é™¤æ‰€æœ‰é—¹é’Ÿï¼ŒæŒ‰å…¶ä»–é”®è¿”å›" << endl;	//ç”»é¢è¾“å‡º 
 	do
 	{
 		if (_kbhit())
-			c = _getch(); //×Ö·û¶ÁÈ¡
+			c = _getch(); //å­—ç¬¦è¯»å–
 	} while (c == ' ');
 	if (c == '1')
 	{
-		struct clock tmp; //ÏÈÊäÈë²ÎÊıºóÍÆÈëvector 
-		int temp = 0;//ÁÙÊ±¼ÆÊı 
+		struct clock tmp; //å…ˆè¾“å…¥å‚æ•°åæ¨å…¥vector 
+		int temp = 0;//ä¸´æ—¶è®¡æ•° 
 		clearScreen();
 		char str[26];
-		asctime_s(str, sizeof str, &info); //Ê±¼ä×Ö·û´® 
-		cout << " µ±Ç°Ê±¼ä = " << str << endl;
-		cout << " ÇëË³ĞòÊäÈëh m s£¬³ÌĞò»áÔÚhĞ¡Ê±m·ÖÖÓsÃëÊ±ÏìÁå(24hÖÆ)" << endl;   //»­ÃæÊä³ö 
+		asctime_s(str, sizeof str, &info); //æ—¶é—´å­—ç¬¦ä¸² 
+		cout << " å½“å‰æ—¶é—´ = " << str << endl;
+		cout << " è¯·é¡ºåºè¾“å…¥h m sï¼Œç¨‹åºä¼šåœ¨hå°æ—¶måˆ†é’Ÿsç§’æ—¶å“é“ƒ(24håˆ¶)" << endl;   //ç”»é¢è¾“å‡º 
 		do
 		{
 			if (temp != 0)
-				cout << " Êı¾İ´íÎó£¬ÇëÖØĞÂÊäÈë" << endl;
+				cout << " æ•°æ®é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥" << endl;
 			cin.clear();
 			cin.sync();
 			cin >> tmp.h >> tmp.m >> tmp.s;
 			temp++;
-		} while (tmp.h > 23 || tmp.m > 59 || tmp.s > 59); //ÈôÊı¾İ´íÎóÔòÖØĞÂÊäÈë 
-		clocks.push_back(tmp);//ÍÆÈëvector 
+		} while (tmp.h > 23 || tmp.m > 59 || tmp.s > 59); //è‹¥æ•°æ®é”™è¯¯åˆ™é‡æ–°è¾“å…¥ 
+		clocks.push_back(tmp);//æ¨å…¥vector 
 	}
 	if (c == '2' && !clocks.empty())
 	{
 		int num, tot = 0;
 		clearScreen();
 		char str[26];
-		asctime_s(str, sizeof str, &info); //Ê±¼ä×Ö·û´® 
-		cout << " µ±Ç°Ê±¼ä = " << str << endl;
+		asctime_s(str, sizeof str, &info); //æ—¶é—´å­—ç¬¦ä¸² 
+		cout << " å½“å‰æ—¶é—´ = " << str << endl;
 		if (!clocks.empty())
 		{
-			cout << " ÄÖÖÓÁĞ±í£º" << endl; //»­ÃæÊä³ö 
+			cout << " é—¹é’Ÿåˆ—è¡¨ï¼š" << endl; //ç”»é¢è¾“å‡º 
 			for (int i = 0; i < clocks.size(); i++)
 				cout << i + 1 << ' ' << clocks[i].h << "h " << clocks[i].m << "m " << clocks[i].s << "s " << endl;
 		}
-		cout << endl << " ÇëÊäÈëÒªÉ¾³ıµÄÄÖÖÓµÄ±àºÅ£º" << endl;
+		cout << endl << " è¯·è¾“å…¥è¦åˆ é™¤çš„é—¹é’Ÿçš„ç¼–å·ï¼š" << endl;
 		do
 		{
 			if (tot != 0)
-				cout << " Êı¾İ´íÎó£¬ÇëÖØĞÂÊäÈë" << endl;
+				cout << " æ•°æ®é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥" << endl;
 			cin.clear();
 			cin.sync();
 			cin >> num;
@@ -116,20 +116,20 @@ inline void setClock() // ÄÖÖÓÉèÖÃº¯Êı
 	{
 		clearScreen();
 		char str[26];
-		asctime_s(str, sizeof str, &info); //Ê±¼ä×Ö·û´® 
-		cout << " µ±Ç°Ê±¼ä = " << str << endl;
+		asctime_s(str, sizeof str, &info); //æ—¶é—´å­—ç¬¦ä¸² 
+		cout << " å½“å‰æ—¶é—´ = " << str << endl;
 		clocks.clear();
 	}
 }
 
-inline void checkClock() //¼ì²âÄÖÖÓ
+inline void checkClock() //æ£€æµ‹é—¹é’Ÿ
 {
-	for (int i = 0; i < clocks.size(); i++)//±éÀúÕû¸öÈİÆ÷ 
-		if (clocks[i].h == info.tm_hour && clocks[i].m == info.tm_min && clocks[i].s == info.tm_sec)//Èç¹ûµ½Ê±¼äÁË 
+	for (int i = 0; i < clocks.size(); i++)//éå†æ•´ä¸ªå®¹å™¨ 
+		if (clocks[i].h == info.tm_hour && clocks[i].m == info.tm_min && clocks[i].s == info.tm_sec)//å¦‚æœåˆ°æ—¶é—´äº† 
 		{
 			int tmpin;
-			ringClock(tmpin);//ÏìÁå 
-			if (tmpin == 2)//Èç¹ûÑ¡ÔñÎå·ÖÖÓºóÏìÁå 
+			ringClock(tmpin);//å“é“ƒ 
+			if (tmpin == 2)//å¦‚æœé€‰æ‹©äº”åˆ†é’Ÿåå“é“ƒ 
 			{
 				struct clock tmp;
 				tmp.h = clocks[i].h;
@@ -137,75 +137,75 @@ inline void checkClock() //¼ì²âÄÖÖÓ
 				tmp.s = clocks[i].s;
 				clocks.push_back(tmp);
 			}
-			clocks.erase(clocks.begin() + i);//É¾³ıÄÖÖÓ 
+			clocks.erase(clocks.begin() + i);//åˆ é™¤é—¹é’Ÿ 
 		}
 }
 
-inline void setTimer() // ¼ÆÊ±Æ÷ÉèÖÃº¯Êı 
+inline void setTimer() // è®¡æ—¶å™¨è®¾ç½®å‡½æ•° 
 {
 	char c = ' ';
 	clearScreen();
 	getTime();
 	char str[26];
-	asctime_s(str, sizeof str, &info); //Ê±¼ä×Ö·û´® 
-	cout << " µ±Ç°Ê±¼ä = " << str << endl;
-	cout << " °´1ÉèÖÃ¼ÆÊ±Æ÷£¬°´2É¾³ı¼ÆÊ±Æ÷£¬°´3Çå³ıËùÓĞ¼ÆÊ±Æ÷£¬°´ÆäËû¼ü·µ»Ø" << endl;	//»­ÃæÊä³ö 
-	cout << " ¼ÆÊ±Æ÷²»Ö§³Ö¿çÌì¼ÆÊ±£¬ÈçÓĞĞèÒªÇëÊ¹ÓÃÄÖÖÓ¹¦ÄÜ£¡" << endl;
+	asctime_s(str, sizeof str, &info); //æ—¶é—´å­—ç¬¦ä¸² 
+	cout << " å½“å‰æ—¶é—´ = " << str << endl;
+	cout << " æŒ‰1è®¾ç½®è®¡æ—¶å™¨ï¼ŒæŒ‰2åˆ é™¤è®¡æ—¶å™¨ï¼ŒæŒ‰3æ¸…é™¤æ‰€æœ‰è®¡æ—¶å™¨ï¼ŒæŒ‰å…¶ä»–é”®è¿”å›" << endl;	//ç”»é¢è¾“å‡º 
+	cout << " è®¡æ—¶å™¨ä¸æ”¯æŒè·¨å¤©è®¡æ—¶ï¼Œå¦‚æœ‰éœ€è¦è¯·ä½¿ç”¨é—¹é’ŸåŠŸèƒ½ï¼" << endl;
 	do
 	{
 		if (_kbhit())
-			c = _getch(); //×Ö·û¶ÁÈ¡
+			c = _getch(); //å­—ç¬¦è¯»å–
 	} while (c == ' ');
 	if (c == '1')
 	{
-		struct timer tmp;//ÏÈÊäÈë²ÎÊıºóÍÆÈëvector
+		struct timer tmp;//å…ˆè¾“å…¥å‚æ•°åæ¨å…¥vector
 		int temp = 0;
 		clearScreen();
 		char str[26];
-		asctime_s(str, sizeof str, &info); //Ê±¼ä×Ö·û´® 
-		cout << " µ±Ç°Ê±¼ä = " << str << endl;
-		cout << " ÇëË³ĞòÊäÈëh m s£¬³ÌĞò»áÔÚhĞ¡Ê±m·ÖÖÓsÃëºóÏìÁå" << endl;
+		asctime_s(str, sizeof str, &info); //æ—¶é—´å­—ç¬¦ä¸² 
+		cout << " å½“å‰æ—¶é—´ = " << str << endl;
+		cout << " è¯·é¡ºåºè¾“å…¥h m sï¼Œç¨‹åºä¼šåœ¨hå°æ—¶måˆ†é’Ÿsç§’åå“é“ƒ" << endl;
 		do
 		{
 			if (temp != 0)
-				cout << " Êı¾İ´íÎó£¬ÇëÖØĞÂÊäÈë" << endl;
+				cout << " æ•°æ®é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥" << endl;
 			getTime();
 			cin.clear();
 			cin.sync();
 			cin >> tmp.h >> tmp.m >> tmp.s;
 			temp++;
-		}											//Èç¹û¼ÆÊ±Ê±¼ä¿çÌìÔò²»Í¨¹ı			
+		}											//å¦‚æœè®¡æ—¶æ—¶é—´è·¨å¤©åˆ™ä¸é€šè¿‡			
 		while (tmp.h > 23 || tmp.m > 59 || tmp.s > 59 || ((info.tm_hour + tmp.h) * 3600 + (info.tm_min + tmp.m) * 60 + (info.tm_sec + tmp.s) >= 86100));
-		getTime(); //»ñÈ¡Ê±¼ä 
+		getTime(); //è·å–æ—¶é—´ 
 		tmp.oh = tmp.h + info.tm_hour;
 		tmp.om = tmp.m + info.tm_min;
-		tmp.os = tmp.s + info.tm_sec; //µÖÏû¼ÆËãÊ±¼ä 
+		tmp.os = tmp.s + info.tm_sec; //æŠµæ¶ˆè®¡ç®—æ—¶é—´ 
 		if (tmp.oh >= 24)
 			tmp.oh = tmp.oh % 24;
 		if (tmp.om >= 60)
 			tmp.om = tmp.om % 60;
 		if (tmp.os >= 60)
 			tmp.os = tmp.os % 60;
-		timers.push_back(tmp);//ÍÆÈëvector 
+		timers.push_back(tmp);//æ¨å…¥vector 
 	}
 	if (c == '2' && !timers.empty())
 	{
 		int num, tot = 0;
 		clearScreen();
 		char str[26];
-		asctime_s(str, sizeof str, &info); //Ê±¼ä×Ö·û´® 
-		cout << " µ±Ç°Ê±¼ä = " << str << endl;
+		asctime_s(str, sizeof str, &info); //æ—¶é—´å­—ç¬¦ä¸² 
+		cout << " å½“å‰æ—¶é—´ = " << str << endl;
 		if (!timers.empty())
 		{
-			cout << " ¼ÆÊ±Æ÷ÁĞ±í£º" << endl; //»­ÃæÊä³ö 
+			cout << " è®¡æ—¶å™¨åˆ—è¡¨ï¼š" << endl; //ç”»é¢è¾“å‡º 
 			for (int i = 0; i < timers.size(); i++)
 				cout << i + 1 << ' ' << timers[i].h << "h " << timers[i].m << "m " << timers[i].s << "s " << endl;
 		}
-		cout << endl << " ÇëÊäÈëÒªÉ¾³ıµÄÄÖÖÓµÄ±àºÅ£º" << endl;
+		cout << endl << " è¯·è¾“å…¥è¦åˆ é™¤çš„é—¹é’Ÿçš„ç¼–å·ï¼š" << endl;
 		do
 		{
 			if (tot != 0)
-				cout << " Êı¾İ´íÎó£¬ÇëÖØĞÂÊäÈë" << endl;
+				cout << " æ•°æ®é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥" << endl;
 			cin.clear();
 			cin.sync();
 			cin >> num;
@@ -217,20 +217,20 @@ inline void setTimer() // ¼ÆÊ±Æ÷ÉèÖÃº¯Êı
 	{
 		clearScreen();
 		char str[26];
-		asctime_s(str, sizeof str, &info); //Ê±¼ä×Ö·û´® 
-		cout << " µ±Ç°Ê±¼ä = " << str << endl;
+		asctime_s(str, sizeof str, &info); //æ—¶é—´å­—ç¬¦ä¸² 
+		cout << " å½“å‰æ—¶é—´ = " << str << endl;
 		timers.clear();
 	}
 }
 
-inline void checkTimer() //¼ì²â¼ÆÊ±Æ÷
+inline void checkTimer() //æ£€æµ‹è®¡æ—¶å™¨
 {
-	for (int i = 0; i < timers.size(); i++)//±éÀúÕû¸öÈİÆ÷ 
+	for (int i = 0; i < timers.size(); i++)//éå†æ•´ä¸ªå®¹å™¨ 
 	{
-		if (timers[i].oh * 3600 + timers[i].om * 60 + timers[i].os <= info.tm_hour * 3600 + info.tm_min * 60 + info.tm_sec)//Èç¹ûµ½Ê±¼äÁË 
+		if (timers[i].oh * 3600 + timers[i].om * 60 + timers[i].os <= info.tm_hour * 3600 + info.tm_min * 60 + info.tm_sec)//å¦‚æœåˆ°æ—¶é—´äº† 
 		{
-			ringTimer();//ÏìÁå 
-			timers.erase(timers.begin() + i);//É¾³ı¶¨Ê±Æ÷ 
+			ringTimer();//å“é“ƒ 
+			timers.erase(timers.begin() + i);//åˆ é™¤å®šæ—¶å™¨ 
 		}
 		else
 		{
@@ -248,7 +248,7 @@ inline void checkTimer() //¼ì²â¼ÆÊ±Æ÷
 inline void setStopwatch()
 {
 	clearScreen();
-	cout << endl << " ¼ÓÔØÖĞQvQ" << endl;
+	cout << endl << " åŠ è½½ä¸­QvQ" << endl;
 	bool swon = false;
 	stopwatch.h = 0;
 	stopwatch.m = 0;
@@ -257,43 +257,43 @@ inline void setStopwatch()
 	while (true)
 	{
 		char c = ' ';
-		t2 = t1;//t1,t2Ğ£×¼ 
-		getTime(); //»ñÈ¡Ê±¼ä 
+		t2 = t1;//t1,t2æ ¡å‡† 
+		getTime(); //è·å–æ—¶é—´ 
 		if (t1 != t2)
 		{
 			clearScreen();
 			char str[26];
-			asctime_s(str, sizeof str, &info); //Ê±¼ä×Ö·û´® 
-			cout << " µ±Ç°Ê±¼ä = " << str << endl;
-			cout << " °´1¿ªÊ¼/ÔİÍ££¬°´2·ÖÁÑ£¬°´3ÇåÁã£¬°´ÆäËû¼üÍË³ö" << endl;
+			asctime_s(str, sizeof str, &info); //æ—¶é—´å­—ç¬¦ä¸² 
+			cout << " å½“å‰æ—¶é—´ = " << str << endl;
+			cout << " æŒ‰1å¼€å§‹/æš‚åœï¼ŒæŒ‰2åˆ†è£‚ï¼ŒæŒ‰3æ¸…é›¶ï¼ŒæŒ‰å…¶ä»–é”®é€€å‡º" << endl;
 			if (swon)
 			{
 				stopwatch.time++;
 				stopwatch.h = stopwatch.time / 3600;
 				stopwatch.m = stopwatch.time / 60 % 60;
 				stopwatch.s = stopwatch.time % 60;
-			}									// ÓÃÆæ¹ÖµÄ·½·¨ÊµÏÖ¸ñÊ½»¯ÊäÈëÊä³ö 
+			}									// ç”¨å¥‡æ€ªçš„æ–¹æ³•å®ç°æ ¼å¼åŒ–è¾“å…¥è¾“å‡º 
 			cout << " " << stopwatch.h / 10 << stopwatch.h % 10 << ":" << stopwatch.m / 10 << stopwatch.m % 10 << ":" << stopwatch.s / 10 << stopwatch.s % 10 << endl << endl;
 			if (!sws.empty())
 			{
-				cout << " ·ÖÁÑÁĞ±í£º" << endl;
-				for (int i = 0; i < sws.size(); i++) // ÓÃÆæ¹ÖµÄ·½·¨ÊµÏÖ¸ñÊ½»¯ÊäÈëÊä³ö 
+				cout << " åˆ†è£‚åˆ—è¡¨ï¼š" << endl;
+				for (int i = 0; i < sws.size(); i++) // ç”¨å¥‡æ€ªçš„æ–¹æ³•å®ç°æ ¼å¼åŒ–è¾“å…¥è¾“å‡º 
 					cout << " " << (i + 1) / 10 << (i + 1) % 10 << " " << sws[i].h / 10 << sws[i].h % 10 << ":" << sws[i].m / 10 << sws[i].m % 10 << ":" << sws[i].s / 10 << sws[i].s % 10 << endl;
 			}
 			checkClock();
 			checkTimer();
 		}
 		if (_kbhit())
-			c = _getch(); //×Ö·û¶ÁÈ¡ 
+			c = _getch(); //å­—ç¬¦è¯»å– 
 		if (c == '1')
 			swon = !swon;
 		if (c == '2' && swon)
 		{
-			struct sw tmp; //ÏÈÊäÈë²ÎÊıºóÍÆÈëvector 
+			struct sw tmp; //å…ˆè¾“å…¥å‚æ•°åæ¨å…¥vector 
 			tmp.h = stopwatch.h;
 			tmp.m = stopwatch.m;
 			tmp.s = stopwatch.s;
-			sws.push_back(tmp);//ÍÆÈëvector 
+			sws.push_back(tmp);//æ¨å…¥vector 
 		}
 		if (c == '3')
 		{
@@ -319,37 +319,37 @@ int main()
 	while (true)
 	{
 		char c = ' ';
-		t2 = t1;//t1,t2Ğ£×¼ 
-		getTime(); //»ñÈ¡Ê±¼ä 
-		if (t1 != t2) //Èôt1Ë¢ĞÂºóÓÚt2²»ÏàÍ¬ÔòË¢ĞÂ»­Ãæ 
+		t2 = t1;//t1,t2æ ¡å‡† 
+		getTime(); //è·å–æ—¶é—´ 
+		if (t1 != t2) //è‹¥t1åˆ·æ–°åäºt2ä¸ç›¸åŒåˆ™åˆ·æ–°ç”»é¢ 
 		{
-			clearScreen(); //Ë¢ĞÂ 
+			clearScreen(); //åˆ·æ–° 
 			char str[26];
-			asctime_s(str, sizeof str, &info); //Ê±¼ä×Ö·û´® 
-			cout << " µ±Ç°Ê±¼ä = " << str << endl;
+			asctime_s(str, sizeof str, &info); //æ—¶é—´å­—ç¬¦ä¸² 
+			cout << " å½“å‰æ—¶é—´ = " << str << endl;
 			showRing();
 			cout << endl;
-			cout << " °´N¿É½øÈëÄÖÖÓ¹ÜÀí£¡" << endl;
-			cout << " °´M¿É½øÈë¼ÆÊ±Æ÷¹ÜÀí£¡" << endl;
-			cout << " °´S¿É½øÈëÃë±í¹ÜÀí£¡" << endl;
-			cout << " °´R¿É½øÈëÁåÉù¹ÜÀí£¡" << endl;
-			cout << " °´Q¿ÉÍË³ö³ÌĞò£¡" << endl << endl;
+			cout << " æŒ‰Nå¯è¿›å…¥é—¹é’Ÿç®¡ç†ï¼" << endl;
+			cout << " æŒ‰Må¯è¿›å…¥è®¡æ—¶å™¨ç®¡ç†ï¼" << endl;
+			cout << " æŒ‰Så¯è¿›å…¥ç§’è¡¨ç®¡ç†ï¼" << endl;
+			cout << " æŒ‰Rå¯è¿›å…¥é“ƒå£°ç®¡ç†ï¼" << endl;
+			cout << " æŒ‰Qå¯é€€å‡ºç¨‹åºï¼" << endl << endl;
 			if (!clocks.empty())
 			{
-				cout << " ÄÖÖÓÁĞ±í£º" << endl;
+				cout << " é—¹é’Ÿåˆ—è¡¨ï¼š" << endl;
 				for (int i = 0; i < clocks.size(); i++)
 					cout << " " << i + 1 << ' ' << clocks[i].h << "h " << clocks[i].m << "m " << clocks[i].s << "s " << endl;
 			}
 			cout << endl;
 			if (!timers.empty())
 			{
-				cout << " ¼ÆÊ±Æ÷ÁĞ±í£º" << endl;
+				cout << " è®¡æ—¶å™¨åˆ—è¡¨ï¼š" << endl;
 				for (int i = 0; i < timers.size(); i++)
 					cout << " " << i + 1 << ' ' << timers[i].h << "h " << timers[i].m << "m " << timers[i].s << "s " << endl;
 			}
 		}
 		if (_kbhit())
-			c = _getch(); //×Ö·û¶ÁÈ¡ 
+			c = _getch(); //å­—ç¬¦è¯»å– 
 		if (c == 'n' || c == 'N')
 			setClock();
 		if (c == 'm' || c == 'M')
